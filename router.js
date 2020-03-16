@@ -20,10 +20,23 @@ module.exports = function(app) {
       groupController.CreateGroup(req, res);
     }
   );
-  
+
+  // app.get("/api/token", async (req, res) => {
+  //   const token = await spikeGetToken();
+  //   console.log(token);
+  //   res.send(token);
+  // });
+
 
   app.get("/api/getAllGroups", (req, res) => {
     groupController.GetAllGroups(req, res);
+  });
+
+  app.get("/api/getToken", async (req, res) => {
+    console.log("1");
+    const token = await spikeGetToken();
+    console.log(token);
+    res.send(token);
   });
 
   app.get("/api/allGroups/getGroupsByPerson/:namePerson", (req, res) => {

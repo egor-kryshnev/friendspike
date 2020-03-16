@@ -28,7 +28,7 @@ exports.CheckUser = async function(req, res) {
       console.log(token);
       const resAx = axios.get(
         //'' , {
-        '' + req.body._id , {
+        'http://kartoffel-master.eastus.cloudapp.azure.com:3001/api/persons/search' + req.body._id , {
           headers: {
             // Authorization: process.env.TOKEN
             Authorization: token
@@ -125,7 +125,7 @@ exports.getUserByName = async function(req, res) {
   const token =  await spikeGetToken();
   const resAx = axios.get(
     // '' , {
-    '' , {
+    'http://kartoffel-master.eastus.cloudapp.azure.com:3001/api/persons/search' , {
       headers: {
         // Authorization: process.env.TOKEN
         Authorization: token
