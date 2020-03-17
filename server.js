@@ -9,29 +9,29 @@ const hsts = require("hsts");
 // var tunnel = require("tunnel-ssh");
 var bodyParser = require("body-parser");
 var port = process.env.PORT || 3003;
-// const path = require("path");
+const path = require("path");
 // var spikeAPI = require("./spikeKartoffel");
-// const { getSpikeAuthMiddleWare } = require("spike-auth-middleware");
+const { getSpikeAuthMiddleWare } = require("spike-auth-middleware");
 
 
 class Server {
   constructor() {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-    // const configuration = {
-    //   audience: "sKGgQWajWKYj49DqZKRR1oLNWi3Im8",
-    //   allowedScopes: ["read", "write"],
-    //   pathToPublicKey: path.resolve(__dirname, './publickey.pem'),
-    //   useBearerToken: false
-    // }
+    const configuration = {
+      audience: "_x8XM2ydp3WOE_H6t3Ox4Mc9_55waX",
+      allowedScopes: ["read", "write"],
+      pathToPublicKey: path.resolve(__dirname, './publickey.pem'),
+      useBearerToken: false
+    }
 
-    // const allowForReadScopeOnly = getSpikeAuthMiddleWare(configuration);
+    const allowForReadScopeOnly = getSpikeAuthMiddleWare(configuration);
 
     this.app = express();
     this.app.listen(port, function() {
       console.log("Server listening on port: " + port);
     });
-    // this.app.use(allowForReadScopeOnly);
+    this.app.use(allowForReadScopeOnly);
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));

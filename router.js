@@ -21,12 +21,6 @@ module.exports = function(app) {
     }
   );
 
-  // app.get("/api/token", async (req, res) => {
-  //   const token = await spikeGetToken();
-  //   console.log(token);
-  //   res.send(token);
-  // });
-
 
   app.get("/api/getAllGroups", (req, res) => {
     groupController.GetAllGroups(req, res);
