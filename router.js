@@ -89,13 +89,13 @@ module.exports = function(app) {
       groupController.Update(req, res);
     }
   );
-  // /api/groups
+  // /api/groups/:id
   
   // /api/deleteGroup
   app.delete("/api/groups/delete", (req, res) => { 
     groupController.Delete(req, res);
   });
-  // /api/groups
+  // /api/groups/:id
 
   app.post("/api/sendEmail", (req, res) => {
     groupController.SendMail(req, res);
