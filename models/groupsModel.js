@@ -11,7 +11,8 @@ var GroupSchema = new Schema({
     }
   ],
   imgPath: String,
-  description: String
+  description: String,
+  type: String
 });
 GroupSchema.set("versionKey", false);
 var Groups = mongoose.model("Groups", GroupSchema, "groups");

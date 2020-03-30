@@ -102,6 +102,8 @@ exports.ValidateName = (req, res, next) => {
   });
 };
 
+// exports.ValidateTypeParans
+
 exports.ValidateUsersIDinDB = (req, res, next) => {
   var UsersIDArr = req.body.people;
   Users.countDocuments({ _id: UsersIDArr }, function(err, countofDoc) {

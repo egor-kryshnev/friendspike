@@ -5,19 +5,14 @@ var validator = require("email-validator");
 var exports = module.exports;
 
 exports.CreateGroup = function(req, res) {
-  console.log("cretegroup", req.body);
-  
+  console.log("Create Group:", req.body);
   var group = new Groups(req.body);
   for (let i = 0; i < req.body.people.length; i++) {
     Users.findOne({ _id: req.body.people[i].user }, (err, user) => {
       if (user == null || user == undefined) {
         var newUser = new Users(req.body.people[i].user);
         console.log(newUser);
-        newUser.save(err => {
-          if (err) throw err;
-        });
-      } else {
-        console.log("error");
+        newUser.save(err => { if (err) throw err; });
       }
     });
   }
@@ -34,6 +29,13 @@ exports.GetAllGroups = function(req, res) {
   });
 };
 
+exports.getGroupsByType = function(req, res){
+  Groups.find({ type: req.params.typeGroup }, (err, groups) => {
+    if (err) throw err;
+    res.status(200).send(groups);
+  })
+}
+
 exports.GetOneById = function(req, res) {
   Groups.findOne({ _id: req.params.id })
     .populate("people.user")
@@ -42,6 +44,37 @@ exports.GetOneById = function(req, res) {
       res.status(200).send(group);
     });
 };
+
+exports.GetGroupByTypeAndUserId = function(req, res){
+  console.log(req.params.userId, req.params.typeGroup); 
+  let userId = req.params.userId;
+  let typeGroup = req.params.typeGroup
+  // if(req.params.userId == undefined || req.params.userId == null){
+  //   this.getGroupsByType(req, res);
+  // }
+  // else if(req.params.typeGroup == undefined || req.params.typeGroup == null){
+  //   GetGroupsByPerson(req, res)
+  // }
+  Groups.find({ people: { $elemMatch: { user: userId } }, type: typeGroup })
+  .exec((err, groups) => {
+    console.log(groups);
+    if (err) throw err;
+    // if(groups = []){
+    //   res.json({Error: "This user haven't groups with this type :("});
+    // }
+    // else{
+      res.status(200).send(groups);
+    // }
+  });
+
+    // Groups.find({ type: req.params.typeGroup }, (err, groups) => {
+    //   if (err) throw err;
+    //   res.status(200).send(groups);
+    // })
+
+}
+
+
 
 exports.GetOneByName = function(req, res) {
   Groups.findOne({ name: req.params.name })
@@ -75,6 +108,18 @@ exports.GetGroupsByPerson = (req, res) => {
       });
   });
 };
+
+exports.GetGroupsByPersonId = (req, res) => {
+  Groups.find({ people: { $elemMatch: { user: req.userId } } })
+    .populate("people.user")
+    .exec((err, groups) => {
+      if (err) throw err;
+      console.log(groups);
+      res.status(200).send(groups);
+    });
+}
+
+
 
 /** by person id */
 exports.GetGroupsByPersonAdmin = (req, res) => {
