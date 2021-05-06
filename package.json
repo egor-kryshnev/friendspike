@@ -17,7 +17,7 @@
     "redis": "^3.0.2",
     "redis-cli": "^1.4.0",
     "redis-server": "^1.2.2",
-    "sanitize-html": "^1.20.1",
+    "sanitize-html": "^2.3.2",
     "spike-auth-middleware": "^1.1.5",
     "spike-get-token": "^1.1.1",
     "tunnel-ssh": "^4.1.4"
