@@ -38,6 +38,6 @@
     "node-mocks-http": "^1.7.6",
     "nodemailer": "^6.3.0",
     "supertest": "^4.0.2",
-    "validator": "^11.0.0"
+    "validator": "^13.7.0"
   }
 }
