@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "dotenv": "^8.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.2",
     "redis": "^3.0.2",
     "redis-cli": "^1.4.0",
